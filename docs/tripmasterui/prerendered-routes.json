@@ -1,0 +1,11 @@
+{
+  "routes": {
+    "/": {},
+    "/destinations": {},
+    "/features": {},
+    "/home": {},
+    "/login": {},
+    "/pricing": {},
+    "/signup": {}
+  }
+}
