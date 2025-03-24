@@ -1,12 +1,24 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'tripmasterui';
+
+  watchDemo() {
+    // Implement demo video functionality
+    console.log('Opening demo video...');
+  }
+
+  getStarted() {
+    // Implement get started functionality
+    console.log('Starting trip planning...');
+  }
 }

@@ -1,0 +1,219 @@
+// // Variables
+// $primary-color: #4A90E2;
+// $secondary-color: #F5A623;
+// $text-color: #333333;
+// $light-text: #FFFFFF;
+// $background-dark: #1A1A1A;
+// $background-light: #F5F5F5;
+
+// // Global styles
+// :host {
+//   display: block;
+//   font-family: 'Inter', sans-serif;
+// }
+
+// // Navigation
+// .navbar {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: 1rem 5%;
+//   background-color: $background-dark;
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   z-index: 1000;
+
+//   .nav-brand {
+//     .logo {
+//       color: $light-text;
+//       text-decoration: none;
+//       font-size: 1.5rem;
+//       font-weight: bold;
+//     }
+//   }
+
+//   .nav-links {
+//     display: flex;
+//     gap: 2rem;
+
+//     a {
+//       color: $light-text;
+//       text-decoration: none;
+//       transition: color 0.3s ease;
+
+//       &:hover {
+//         color: $primary-color;
+//       }
+//     }
+//   }
+
+//   .nav-auth {
+//     display: flex;
+//     gap: 1rem;
+
+//     a {
+//       padding: 0.5rem 1rem;
+//       border-radius: 4px;
+//       text-decoration: none;
+//       transition: all 0.3s ease;
+
+//       &.login-btn {
+//         color: $light-text;
+//         border: 1px solid $light-text;
+
+//         &:hover {
+//           background-color: rgba(255, 255, 255, 0.1);
+//         }
+//       }
+
+//       &.signup-btn {
+//         background-color: $primary-color;
+//         color: $light-text;
+
+//         &:hover {
+//           background-color: darken($primary-color, 10%);
+//         }
+//       }
+//     }
+//   }
+// }
+
+// // Hero Section
+// .hero-section {
+//   padding: 8rem 5% 4rem;
+//   background: linear-gradient(135deg, $background-dark 0%, #2C2C2C 100%);
+//   min-height: 80vh;
+//   display: flex;
+//   align-items: center;
+//   gap: 4rem;
+
+//   .hero-content {
+//     flex: 1;
+//     color: $light-text;
+
+//     h1 {
+//       font-size: 3.5rem;
+//       font-weight: bold;
+//       margin-bottom: 1.5rem;
+//       line-height: 1.2;
+//     }
+
+//     p {
+//       font-size: 1.2rem;
+//       margin-bottom: 2rem;
+//       line-height: 1.6;
+//       color: rgba(255, 255, 255, 0.8);
+//     }
+
+//     .hero-buttons {
+//       display: flex;
+//       gap: 1rem;
+
+//       button {
+//         padding: 0.75rem 1.5rem;
+//         border-radius: 4px;
+//         font-size: 1rem;
+//         font-weight: 500;
+//         cursor: pointer;
+//         transition: all 0.3s ease;
+
+//         &.get-started-btn {
+//           background-color: $primary-color;
+//           color: $light-text;
+//           border: none;
+
+//           &:hover {
+//             background-color: darken($primary-color, 10%);
+//           }
+//         }
+
+//         &.watch-demo-btn {
+//           background-color: transparent;
+//           color: $light-text;
+//           border: 1px solid $light-text;
+//           display: flex;
+//           align-items: center;
+//           gap: 0.5rem;
+
+//           &:hover {
+//             background-color: rgba(255, 255, 255, 0.1);
+//           }
+
+//           .demo-icon {
+//             font-size: 1.2rem;
+//           }
+//         }
+//       }
+//     }
+//   }
+
+//   .hero-image {
+//     flex: 1;
+    
+//     img {
+//       width: 100%;
+//       max-width: 600px;
+//       border-radius: 12px;
+//       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+//     }
+//   }
+// }
+
+// // Trust Section
+// .trust-section {
+//   padding: 4rem 5%;
+//   background-color: $background-light;
+//   text-align: center;
+
+//   h2 {
+//     font-size: 2rem;
+//     color: $text-color;
+//     margin-bottom: 3rem;
+//   }
+
+//   .company-logos {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     gap: 4rem;
+//     flex-wrap: wrap;
+
+//     img {
+//       height: 40px;
+//       opacity: 0.7;
+//       transition: opacity 0.3s ease;
+
+//       &:hover {
+//         opacity: 1;
+//       }
+//     }
+//   }
+// }
+
+// // Responsive Design
+// @media (max-width: 1024px) {
+//   .hero-section {
+//     flex-direction: column;
+//     text-align: center;
+
+//     .hero-buttons {
+//       justify-content: center;
+//     }
+//   }
+// }
+
+// @media (max-width: 768px) {
+//   .navbar {
+//     .nav-links {
+//       display: none;
+//     }
+//   }
+
+//   .hero-section {
+//     h1 {
+//       font-size: 2.5rem;
+//     }
+//   }
+// }
