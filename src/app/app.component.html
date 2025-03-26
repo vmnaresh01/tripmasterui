@@ -313,37 +313,149 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between h-16">
       <div class="flex items-center">
-        <a href="/" class="flex items-center">
+        <a routerLink="/" class="flex items-center">
           <i class="ri-compass-3-line text-2xl text-primary mr-2"></i>
           <span class="text-xl font-bold text-dark">Tripmaster</span>
         </a>
       </div>
       <div class="hidden md:flex items-center space-x-8">
-        <a href="/" class="text-dark hover:text-primary transition-colors">Home</a>
-        <a href="/features" class="text-dark hover:text-primary transition-colors">Features</a>
-        <a href="/destinations" class="text-dark hover:text-primary transition-colors">Destinations</a>
-        <a href="/pricing" class="text-dark hover:text-primary transition-colors">Pricing</a>
+        <a routerLink="/" routerLinkActive="text-primary" [routerLinkActiveOptions]="{exact: true}" class="text-dark hover:text-primary transition-colors">Home</a>
+        <ng-container *ngIf="user$ | async">
+          <a routerLink="/dashboard" routerLinkActive="text-primary" class="text-dark hover:text-primary transition-colors">Dashboard</a>
+        </ng-container>
+        <a routerLink="/features" routerLinkActive="text-primary" class="text-dark hover:text-primary transition-colors">Features</a>
+        <a routerLink="/destinations" routerLinkActive="text-primary" class="text-dark hover:text-primary transition-colors">Destinations</a>
+        <a routerLink="/pricing" routerLinkActive="text-primary" class="text-dark hover:text-primary transition-colors">Pricing</a>
         <div class="flex items-center space-x-3">
-          <a href="/login" class="text-primary font-medium hover:text-primary/80 transition-colors">Login</a>
-          <a href="/signup" class="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors font-medium">Sign Up Free</a>
+          <ng-container *ngIf="user$ | async as user; else signInButton">
+            <div class="relative">
+              <button (click)="toggleDropdown($event)" class="flex items-center space-x-2 text-dark hover:text-primary transition-colors">
+                <img [src]="user.photoURL" alt="Profile" class="w-8 h-8 rounded-full">
+                <span>{{ user.displayName }}</span>
+                <i class="ri-arrow-down-s-line" [class.rotate-180]="isDropdownOpen"></i>
+              </button>
+              <div *ngIf="isDropdownOpen" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                <a routerLink="/dashboard" (click)="isDropdownOpen = false" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  Dashboard
+                </a>
+                <button (click)="signOut($event)" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  Sign Out
+                </button>
+              </div>
+            </div>
+          </ng-container>
+          <ng-template #signInButton>
+            <a routerLink="/auth" routerLinkActive="text-primary/80" class="text-primary font-medium hover:text-primary/80 transition-colors">Sign In</a>
+          </ng-template>
         </div>
       </div>
       <div class="md:hidden flex items-center">
-        <button id="mobile-menu-button" class="text-dark">
+        <button (click)="toggleMobileMenu($event)" class="text-dark">
           <i class="ri-menu-line text-2xl"></i>
         </button>
       </div>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden">
+    <div *ngIf="isMobileMenuOpen" class="md:hidden">
       <div class="px-2 pt-2 pb-3 space-y-1">
-        <a href="/" class="block px-3 py-2 text-dark hover:text-primary">Home</a>
-        <a href="/features" class="block px-3 py-2 text-dark hover:text-primary">Features</a>
-        <a href="/destinations" class="block px-3 py-2 text-dark hover:text-primary">Destinations</a>
-        <a href="/pricing" class="block px-3 py-2 text-dark hover:text-primary">Pricing</a>
-        <a href="/login" class="block px-3 py-2 text-primary font-medium">Login</a>
-        <a href="/signup" class="block px-3 py-2 bg-primary text-white rounded-md text-center mt-2">Sign Up Free</a>
+        <a routerLink="/" routerLinkActive="text-primary" [routerLinkActiveOptions]="{exact: true}" (click)="isMobileMenuOpen = false" class="block px-3 py-2 text-dark hover:text-primary">Home</a>
+        <ng-container *ngIf="user$ | async">
+          <a routerLink="/dashboard" routerLinkActive="text-primary" (click)="isMobileMenuOpen = false" class="block px-3 py-2 text-dark hover:text-primary">Dashboard</a>
+        </ng-container>
+        <a routerLink="/features" routerLinkActive="text-primary" (click)="isMobileMenuOpen = false" class="block px-3 py-2 text-dark hover:text-primary">Features</a>
+        <a routerLink="/destinations" routerLinkActive="text-primary" (click)="isMobileMenuOpen = false" class="block px-3 py-2 text-dark hover:text-primary">Destinations</a>
+        <a routerLink="/pricing" routerLinkActive="text-primary" (click)="isMobileMenuOpen = false" class="block px-3 py-2 text-dark hover:text-primary">Pricing</a>
+        <ng-container *ngIf="user$ | async as user; else mobileSignInButton">
+          <div class="px-3 py-2">
+            <div class="flex items-center space-x-2 mb-2">
+              <img [src]="user.photoURL" alt="Profile" class="w-8 h-8 rounded-full">
+              <span class="text-dark">{{ user.displayName }}</span>
+            </div>
+            <button (click)="signOut($event)" class="w-full text-left text-primary hover:text-primary/80">
+              Sign Out
+            </button>
+          </div>
+        </ng-container>
+        <ng-template #mobileSignInButton>
+          <a routerLink="/auth" routerLinkActive="text-primary/80" (click)="isMobileMenuOpen = false" class="block px-3 py-2 text-primary font-medium">Sign In</a>
+        </ng-template>
       </div>
     </div>
   </div>
 </nav>
+
 <router-outlet></router-outlet>
+
+ <!-- Footer -->
+ <footer class="bg-dark text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+      <div class="lg:col-span-2">
+        <div class="flex items-center mb-4">
+          <i class="ri-compass-3-line text-2xl text-primary mr-2"></i>
+          <span class="text-xl font-bold">Tripmaster</span>
+        </div>
+        <p class="text-gray-400 mb-6">Tripmaster is the intelligent travel planning assistant that helps you create personalized itineraries, discover hidden gems, and make the most of your journey.</p>
+        <div class="flex space-x-4">
+          <a href="#" class="text-gray-400 hover:text-white transition-colors">
+            <i class="ri-facebook-fill text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white transition-colors">
+            <i class="ri-twitter-x-fill text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white transition-colors">
+            <i class="ri-instagram-fill text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white transition-colors">
+            <i class="ri-linkedin-fill text-xl"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div>
+        <h3 class="font-bold text-lg mb-4">Product</h3>
+        <ul class="space-y-3">
+          <li><a href="/features" class="text-gray-400 hover:text-white">Features</a></li>
+          <li><a href="/pricing" class="text-gray-400 hover:text-white">Pricing</a></li>
+          <li><a href="/integrations" class="text-gray-400 hover:text-white">Integrations</a></li>
+          <li><a href="/changelog" class="text-gray-400 hover:text-white">Changelog</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h3 class="font-bold text-lg mb-4">Company</h3>
+        <ul class="space-y-3">
+          <li><a href="/about" class="text-gray-400 hover:text-white">About</a></li>
+          <li><a href="/blog" class="text-gray-400 hover:text-white">Blog</a></li>
+          <li><a href="/careers" class="text-gray-400 hover:text-white">Careers</a></li>
+          <li><a href="/contact" class="text-gray-400 hover:text-white">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h3 class="font-bold text-lg mb-4">Legal</h3>
+        <ul class="space-y-3">
+          <li><a href="/privacy" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+          <li><a href="/terms" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+          <li><a href="/cookies" class="text-gray-400 hover:text-white">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+      <p class="text-gray-400 text-sm mb-4 md:mb-0">&copy; 2025 Tripmaster. All rights reserved.</p>
+      <div class="flex space-x-6">
+        <a href="/help" class="text-gray-400 hover:text-white text-sm">Help Center</a>
+        <a href="/status" class="text-gray-400 hover:text-white text-sm">Status</a>
+        <div class="flex items-center text-gray-400">
+          <i class="ri-global-line mr-1 text-sm"></i>
+          <select class="bg-transparent text-sm focus:outline-none">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

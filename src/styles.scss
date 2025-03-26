@@ -1,5 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+@import "remixicon/fonts/remixicon.css";
 
+@theme {
+    --font-display: "Satoshi", "sans-serif";
+    --color-primary: #3563E9;
+    --color-secondary: #54D2C0;
+    --color-dark: #1E293B;
+    --color-light: #F8FAFC;
+    --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
 
 /* Your custom styles below */
