@@ -30,26 +30,20 @@ export class AppComponent {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 
+  signInWithGoogle() {
+    this.authService.signInWithGoogle();
+    this.isMobileMenuOpen = false;
+  }
+
+  async signOut() {
+    await this.authService.signOut();
+    this.isMobileMenuOpen = false;
+    this.isDropdownOpen = false;
+  }
+
   @HostListener('document:click')
-  closeMenus() {
+  onDocumentClick() {
     this.isDropdownOpen = false;
     this.isMobileMenuOpen = false;
-  }
-
-  signOut(event: Event) {
-    event.stopPropagation();
-    this.authService.signOut();
-    this.isDropdownOpen = false;
-    this.isMobileMenuOpen = false;
-  }
-
-  watchDemo() {
-    // Implement demo video functionality
-    console.log('Opening demo video...');
-  }
-
-  getStarted() {
-    // Implement get started functionality
-    console.log('Starting trip planning...');
   }
 }
